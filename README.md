@@ -45,6 +45,7 @@ By default, you should only have to add the two files in the Source directory to
         This init will attempt to create a database unless there is one already there.
         If there is, it will open the db for use.      
 - From the SQLiteDelegate object, methods can be used to talk to the DB.
+
     -Insert using a dictionary where the keys and values are the columns and the values, respectively:
 
         (BOOL) [DBConn insert:@"test2" withTheFields:dict];
