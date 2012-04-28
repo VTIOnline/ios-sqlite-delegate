@@ -31,33 +31,35 @@ By default, you should only have to add the two files in the Source directory to
 
 - In the implementation file, import SQLiteDelegate.h
 - Create a SQLiteDelegate object with either (in further examples, use DBConn):
---[[SQLiteDelegate alloc] initWithVersionedDatabase:@"DBTest.sqlite"]
+
+    -[[SQLiteDelegate alloc] initWithVersionedDatabase:@"DBTest.sqlite"]
 
         This init will attempt to create a database unless there is one already there.
         If there is, it will look for a version table, which should have the version
         of the app.  If the table is missing, or the app version does not match,
         the database file will be deleted and copied back over from the app bundle.
         NOTE:  THE OLD DB WILL NOT BE BACKED UP.  ALL DATA WILL BE DESTROYED!
---[[SQLiteDelegate alloc] initWithDatabase:@"DBTest.sqlite"]
+        
+    -[[SQLiteDelegate alloc] initWithDatabase:@"DBTest.sqlite"]
 
         This init will attempt to create a database unless there is one already there.
         If there is, it will open the db for use.      
 - From the SQLiteDelegate object, methods can be used to talk to the DB.
---Insert using a dictionary where the keys and values are the columns and the values, respectively:
+    -Insert using a dictionary where the keys and values are the columns and the values, respectively:
 
         (BOOL) [DBConn insert:@"test2" withTheFields:dict];
---Update using the 'set' dictionary where the keys and values are the columns and the values, respectively, for the new values and the 'where' dictionary where the keys and values are the columns and the values, respectively:
+    -Update using the 'set' dictionary where the keys and values are the columns and the values, respectively, for the new values and the 'where' dictionary where the keys and values are the columns and the values, respectively:
 
         (BOOL) [DBConn update:@"test2" set:dict2 where:dict];
---Delete from the table using a dictionary where the keys and values are the columns and the values, respectively, are used to delete specific records:
+    -Delete from the table using a dictionary where the keys and values are the columns and the values, respectively, are used to delete specific records:
 
         (BOOL) [DBConn deleteFrom:@"test2" where:dict3];
---Select multiple values (each element is a NSMutableDictionary of the columns (as the key) and the value):
+    -Select multiple values (each element is a NSMutableDictionary of the columns (as the key) and the value):
 
         NSMutableArray * results = [DBConn selectMultiple:@"SELECT * FROM test2"];
---Select single values (NSMutableDictionary of the columns (as the key) and the value):
+    -Select single values (NSMutableDictionary of the columns (as the key) and the value):
 
         NSMutableDictionary *result = [DBConn selectSingle:@"SELECT * FROM test2 WHERE id=1"];
---Query (NSMutableDictionary of the columns or result (as the key) and the value):
+    -Query (NSMutableDictionary of the columns or result (as the key) and the value):
  
         NSMutableArray * results = [DBConn query:@"CREATE TABLE _version(version TEXT)"];
