@@ -188,7 +188,7 @@
         [self finalizeStatement:statement];
         [self closeDatabase];
     }else{
-        NSLog(@"Connection to DB not opened!");
+        NSLog(@"Connection to DB not opened!\n\n%s", sqlite3_errmsg([self database]));
     }
     statement = nil;
     return dataSet;
@@ -377,7 +377,6 @@
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
-                NSLog(@"Query successful...");
                 NSMutableDictionary *dataCols = [[NSMutableDictionary alloc] init];
                 [dataCols setObject:@"Done" forKey:@"Result"];
                 [dataSet addObject:dataCols];
