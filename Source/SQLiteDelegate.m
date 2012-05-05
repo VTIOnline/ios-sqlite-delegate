@@ -288,7 +288,7 @@
         updateSQL = [NSString stringWithFormat:@"%@ WHERE %@",updateSQL, whereFieldSQL];
     }
     else {
-        NSLog(@"It's bad to not have a where in an update.  Definitely bad.  If you want to allow this, erase lines 231 through 234.");
+        NSLog(@"It's bad to not have a where in an update.  Definitely bad.  If you want to allow this, erase the lines that make the else block in the update function.");
         return NO;
     }
     const char *query_stmt = [updateSQL UTF8String];
@@ -335,7 +335,7 @@
         deleteSQL = [NSString stringWithFormat:@"%@ WHERE %@",deleteSQL, whereFieldSQL];
     }
     else {
-        NSLog(@"It's bad to not have a where in a delete.  Definitely bad.  If you want to allow this, erase lines 278 through 281.");
+        NSLog(@"It's bad to not have a where in a delete.  Definitely bad.  If you want to allow this, erase the lines that make up the else block in the deleteFrom function.");
         return NO;
     }
     const char *query_stmt = [deleteSQL UTF8String];
