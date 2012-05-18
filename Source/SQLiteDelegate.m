@@ -272,8 +272,11 @@
     [self finalizeStatement:statement];
     [self closeDatabase];
     fieldNameSQL = nil;
+    [fieldNameSQL autorelease];
     fieldValueSQL = nil;
+    [fieldValueSQL autorelease];
     insertSQL = nil;
+    [insertSQL autorelease];
     fieldNames = nil;
     [fieldNames autorelease];
     fieldValues = nil;
