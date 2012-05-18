@@ -259,6 +259,9 @@
     }
     [self finalizeStatement:statement];
     [self closeDatabase];
+    fieldNameSQL = nil;
+    fieldValueSQL = nil;
+    insertSQL = nil;
     fieldNames = nil;
     fieldValues = nil;
     statement = nil;
