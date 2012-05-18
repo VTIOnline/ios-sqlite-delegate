@@ -66,4 +66,4 @@ By default, you should only have to add the two files in the Source directory to
         `NSMutableArray * results = [DBConn query:@"CREATE TABLE _version(version TEXT)"];`
 
 ###NOTE:
-__This branch is for non-ARC projects.  For ARC-based projects, use the master or ARC branch.__
+__This branch is for non-ARC projects.  For ARC-based projects, use the master or ARC branch.  Also...this is my first time using the autorelease/dealloc code, so I may have missed a few variables. (Especially in the example.)__
