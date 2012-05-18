@@ -83,13 +83,20 @@
                     [class query:@"CREATE TABLE _version(version TEXT)"];
                     NSDictionary *versionInsert = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]] forKey:@"version"];
                     [class insert:@"_version" withTheFields:versionInsert];
+                    [versionInsert autorelease];
                 } else {
                     NSLog(@"Failed to open/create database:\n%@\n%s", databaseName, sqlite3_errmsg([class database]));
                     isConnected = NO;
                 }
             }
+            [defaultDBPath autorelease];
         }
+        [docsDir autorelease];
+        [dirPaths autorelease];
+        [filemgr autorelease];
+        [writableDBPath autorelease];
     }
+    [version autorelease];
     return class;
 }
 
@@ -150,7 +157,12 @@
                 isConnected = NO;
             }
         }
+        [defaultDBPath autorelease];
     }
+    [docsDir autorelease];
+    [dirPaths autorelease];
+    [filemgr autorelease];
+    [writableDBPath autorelease];
     return isConnected;
 }
 
@@ -260,9 +272,12 @@
     [self finalizeStatement:statement];
     [self closeDatabase];
     fieldNames = nil;
+    [fieldNames autorelease];
     fieldValues = nil;
+    [fieldValues autorelease];
     statement = nil;
     fields = nil;
+    [fields autorelease];
     return success;
 }
 
@@ -310,12 +325,18 @@
     [self finalizeStatement:statement];
     [self closeDatabase];
     setFieldNames = nil;
+    [setFieldNames autorelease];
     whereFieldNames = nil;
+    [whereFieldNames autorelease];
     setFieldValues = nil;
+    [setFieldValues autorelease];
     whereFieldValues = nil;
+    [whereFieldValues autorelease];
     setFieldSQL = nil;
+    [setFieldSQL autorelease];
     statement = nil;
     updateSQL = nil;
+    [updateSQL autorelease];
     return success;
 }
 
@@ -357,9 +378,12 @@
     [self finalizeStatement:statement];
     [self closeDatabase];
     whereFieldNames = nil;
+    [whereFieldNames autorelease];
     whereFieldValues = nil;
+    [whereFieldValues autorelease];
     statement = nil;
     deleteSQL = nil;
+    [deleteSQL autorelease];
     return success;
 }
 
@@ -381,6 +405,7 @@
                 [dataCols setObject:@"Done" forKey:@"Result"];
                 [dataSet addObject:dataCols];
                 dataCols = nil;
+                [dataCols autorelease];
             }else{
                 sqlite3_reset(statement);
                 while(sqlite3_step(statement) == SQLITE_ROW){
@@ -391,6 +416,7 @@
                     }
                     [dataSet addObject:dataCols];
                     dataCols = nil;
+                    [dataCols autorelease];
                 }
             }
         }else{
@@ -403,6 +429,14 @@
     }
     statement = nil;
     return dataSet;
+}
+
+- (void)dealloc
+{
+    [databaseName release];
+    [errors release];
+    
+    [super dealloc];
 }
 
 @end
