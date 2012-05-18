@@ -66,4 +66,4 @@ By default, you should only have to add the two files in the Source directory to
         `NSMutableArray * results = [DBConn query:@"CREATE TABLE _version(version TEXT)"];`
 
 ###NOTE:
-__The current version is written for ARC.  I will be modifying the code to use with non-ARC projects and will split the branch to reflect this.__
+__This branch is for non-ARC projects.  For ARC-based projects, use the master or ARC branch.__
